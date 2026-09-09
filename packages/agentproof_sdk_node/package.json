@@ -1,0 +1,10 @@
+{
+  "name": "@agentproof/sdk",
+  "version": "0.1.0",
+  "description": "Experimental AgentProof SDK for Node.js",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": { ".": "./src/index.js" },
+  "engines": { "node": ">=18" },
+  "license": "Apache-2.0"
+}

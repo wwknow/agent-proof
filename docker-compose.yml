@@ -1,0 +1,13 @@
+services:
+  agentproof:
+    build: .
+    image: agentproof/verifier:0.2.0
+    ports:
+      - "8080:8080"
+    environment:
+      AGENTPROOF_HOST: 0.0.0.0
+      AGENTPROOF_PORT: 8080
+      AGENTPROOF_SECRET: ${AGENTPROOF_SECRET:-change-me-before-production}
+      AGENTPROOF_ISSUER: ${AGENTPROOF_ISSUER:-local:agentproof}
+      AGENTPROOF_AUDIENCE: ${AGENTPROOF_AUDIENCE:-local:executor}
+    restart: unless-stopped

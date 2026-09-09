@@ -1,0 +1,9 @@
+{
+  "name": "agent-proof",
+  "private": true,
+  "workspaces": ["packages/agentproof_sdk_node"],
+  "scripts": {
+    "demo": "node examples/basic/demo.mjs"
+  },
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,66 @@
+openapi: 3.0.3
+info:
+  title: AgentProof Verifier API
+  version: 0.2.0
+  description: Reference API for evaluating agent commands and issuing/verifying evidence receipts.
+servers:
+  - url: http://localhost:8080
+paths:
+  /healthz:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: Healthy
+  /v1/info:
+    get:
+      summary: Verifier metadata
+      responses:
+        '200':
+          description: Metadata
+          content:
+            application/json:
+              schema:
+                type: object
+  /v1/verify:
+    post:
+      summary: Evaluate an agent command and issue a receipt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Command'
+      responses:
+        '200':
+          description: Receipt and verification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyResponse'
+        '400':
+          description: Invalid request
+components:
+  schemas:
+    Command:
+      type: object
+      required: [agent_id, tool]
+      properties:
+        agent_id: { type: string }
+        tool: { type: string }
+        params: { type: object, additionalProperties: true }
+        timestamp: { type: number }
+        trace_id: { type: string }
+        runtime_context: { type: object, additionalProperties: true }
+        request_hash: { type: string }
+        response_hash: { type: string }
+        action: { type: string }
+        issuer: { type: string }
+        audience: { type: string }
+        expected_audience: { type: string }
+    VerifyResponse:
+      type: object
+      required: [receipt, verification]
+      properties:
+        receipt: { type: object, additionalProperties: true }
+        verification: { type: object, additionalProperties: true }

@@ -1,0 +1,3 @@
+{"id":"CV-001-MVP","name":"basic allow","command":{"agent_id":"test-agent","tool":"search_web","params":{"query":"weather in Tokyo"}},"expected_verdict":"allow"}
+{"id":"CV-002-MVP","name":"basic deny","command":{"agent_id":"test-agent","tool":"shell_exec","params":{"command":"rm -rf /"}},"expected_verdict":"deny"}
+{"id":"CV-003-MVP","name":"ssrf deny","command":{"agent_id":"test-agent","tool":"fetch_url","params":{"url":"http://127.0.0.1:8080/admin"}},"expected_verdict":"deny"}
