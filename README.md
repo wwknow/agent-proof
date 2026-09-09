@@ -18,7 +18,7 @@ Install the verifier:
     cd packages/agentproof_verifier
     python3 -m pip install -e .
 
-Run the security demo:
+Run the built-in security demo:
 
     agentproof-verify demo
 
@@ -27,7 +27,24 @@ Expected result:
     [ALLOW] verdict=allow valid=True reason=
     [DENY] verdict=deny valid=True reason=rce_pattern_detected
 
-The demo intentionally includes both a permitted action and an unsafe action.
+Test the included safe example:
+
+    agentproof-verify verify ../../examples/quickstart/allow.json --secret "demo-secret"
+
+Expected:
+
+    verdict: allow
+
+Test the included unsafe example:
+
+    agentproof-verify verify ../../examples/quickstart/deny.json --secret "demo-secret"
+
+Expected:
+
+    verdict: deny
+    block_reason: rce_pattern_detected
+
+These examples are intentionally included so a new developer can clone the repository and observe both an allowed and a blocked action without creating any files.
 
 ## What is AgentProof?
 
