@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
@@ -63,10 +64,12 @@ class Handler(BaseHTTPRequestHandler):
             })
             return
         if self.path == "/":
-            html = """<!doctype html><html><head><meta charset='utf-8'><title>AgentProof</title><meta name='viewport' content='width=device-width,initial-scale=1'></head><body><main style='max-width:760px;margin:40px auto;font-family:system-ui'><h1>AgentProof</h1><p>Reference verifier for AI-agent delegation evidence.</p><p>POST a command JSON to <code>/v1/verify</code>.</p><pre>curl -X POST http://localhost:8080/v1/verify \\
-  -H 'content-type: application/json' \\
-  -d '{"agent_id":"demo-agent","tool":"search_web","params":{"query":"hello"}}'</pre><p>Health: <a href='/healthz'>/healthz</a> · Info: <a href='/v1/info'>/v1/info</a></p></main></body></html>"""
-            self._send(200, html.encode("utf-8"), "text/html; charset=utf-8")
+            body = Path("web/index.html").read_bytes()
+            self._send(200, body, "text/html; charset=utf-8")
+            return
+        if self.path == "/app.js":
+            body = Path("web/app.js").read_bytes()
+            self._send(200, body, "application/javascript; charset=utf-8")
             return
         self._send(404, {"error": "not_found"})
 
