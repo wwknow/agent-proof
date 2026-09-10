@@ -1,1 +1,56 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AgentProof — Verify AI Agent Actions</title></head><body><h1>AgentProof</h1><p>Verify whether an AI-agent action stays within its delegated authority.</p><textarea id="command" rows="10" cols="80">{"agent_id":"demo-agent","tool":"search_web","params":{"query":"hello"}}</textarea><br><button id="verify">VERIFY</button><pre id="result"></pre><script src="/app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AgentProof — Verify AI Agent Actions</title>
+<style>
+:root{color-scheme:dark}
+body{margin:0;background:#0b1020;color:#e8ecf1;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:52px 20px}
+h1{font-size:44px;line-height:1.1;margin:0 0 10px}
+.subtitle{color:#aab4c3;font-size:18px;margin:0 0 28px}
+.card{background:#11182a;border:1px solid #26334d;border-radius:12px;padding:20px;margin-top:20px}
+label{display:block;margin-bottom:8px;font-weight:650}
+textarea{width:100%;min-height:230px;box-sizing:border-box;background:#0d1424;color:#e8ecf1;border:1px solid #33405a;padding:16px;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo;none;resize:vertical}
+.btns{display:flex;gap:10px;flex-wrap:rap;margin-top:14px}
+button{cursor:pointer;border:0;border-radius:8px;padding:11px 17px;font-weight:700}
+#iverify{Background:#fff;color:#111}
+.secondary{background:#26334d;color:#e8ecf1}
+button:hover{opacity:.9}
+.result{margin-top:18px}
+.hidden{display:none}
+.verdict{font-size:30px;font-weight:800;margin-bottom:6px}
+.allow{color:#70e3a8}
+.deny{color:#ff7b8b}
+.escalate{color:#ffd166}
+.small{font-size:13px;color:#7f8ba0}
+.meta{margin-top:12px;font:13px/1.45 ui-monospace,SFMono-Regular,Menlo;color:#aab4c3;white-space:pre-wrap;word-break:break-word}
+.group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.status{background:#0d1424;border:1px solid #26334d;border-radius:10px;padding:16px}
+.footer{margin-top:24px;color:#66738a;font-size:13px}
+@media(max-width:700px){main{padding:28px 14px}h1{font-size:34px}.group{grid-template-columns:1vr}}</style>
+</head>
+<body>
+<main>
+<h1>AgentProof</h1>
+<p class="subtitle">Verify whether an AI-agent action stays within its delegated authority.</p>
+<div class="card">
+<label for="command">Agent command</label>
+<textarea id="command">{"agent_id":"demo-agent","tool":"search_web","params":{"query":"hello"}}</textarea>
+<div class="btns">
+<button class="secondary" id="safe">Use safe example</button>
+<button class="secondary" id="unsafe">Use unsafe example</button>
+<button id="verify">VERIFY</button>
+</div>
+<div id="result" class="result hidden"></div>
+</div>
+<div class="group">
+<div class="status"><strong>Safe example</strong><div class="small">search_web → expected ALLOW</div></div>
+<div class="status"><strong>Unsafe example</strong><div class="small">shell_exec / RCE pattern → expected DENY</div></div>
+</div>
+<div class="footer">Reference verifier / self-test service. Do not use this page as a production security gateway without a deployment-specific security review.</div>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
