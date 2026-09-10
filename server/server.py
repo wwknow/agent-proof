@@ -29,7 +29,7 @@ def json_bytes(value: Any) -> bytes:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "AgentProof/0.2"
+    server_version = "AgentProof/0.1.1"
 
     def _send(self, status: int, body: Any, content_type: str = "application/json") -> None:
         payload = body if isinstance(body, bytes) else json_bytes(body)
@@ -57,7 +57,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.path == "/v1/info":
             self._send(200, {
                 "service": "agentproof",
-                "version": "0.2.0",
+                "version": "0.1.1",
                 "verifier": "reference-mvp",
                 "policy_version": VERIFIER.policy_version,
                 "config_hash": VERIFIER.config_hash(),

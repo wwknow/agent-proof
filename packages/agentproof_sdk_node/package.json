@@ -1,6 +1,6 @@
 {
   "name": "@agentproof/sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Experimental AgentProof SDK for Node.js",
   "type": "module",
   "main": "src/index.js",
