@@ -1,5 +1,5 @@
 {
-  "name": "@agentproof/sdk",
+  "name": "@wwknow/agentproof",
   "version": "0.1.1",
   "description": "Experimental AgentProof SDK for Node.js",
   "type": "module",
